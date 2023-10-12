@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PlusIcon from "../icons/PlusIcon";
-import { Column } from "../types";
+import { Column, Id } from "../types";
 import ColumnContainer from "./ColumnContainer";
 
 type Props = {};
@@ -15,12 +15,20 @@ const KanbanBoard = (props: Props) => {
     };
     setColumns([...columns, columnToAdd]);
   };
+  const deleteColumn = (id: Id) => {
+    const filterColumn = columns.filter((col) => col.id !== id);
+    setColumns(filterColumn);
+  };
   return (
     <div className="flex m-auto items-center w-full min-h-screen overflow-x-auto overflow-y-hidden px-[40px]">
       <div className="m-auto flex gap-4">
         <div className="flex gap-4">
           {columns.map((column) => (
-            <ColumnContainer column={column} key={column.id} />
+            <ColumnContainer
+              column={column}
+              key={column.id}
+              deleteColumn={deleteColumn}
+            />
           ))}
         </div>
         <button
