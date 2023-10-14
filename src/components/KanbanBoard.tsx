@@ -47,6 +47,13 @@ const KanbanBoard = (props: Props) => {
       return setActiveColumn(event.active.data.current.column);
     }
   };
+  const updateColumn = (id: Id, title: string) => {
+    const newColumns = columns.map((col) => {
+      if (col.id != id) return col;
+      return { ...col, title };
+    });
+    setColumns(newColumns);
+  };
 
   const onDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -79,6 +86,7 @@ const KanbanBoard = (props: Props) => {
                   column={column}
                   key={column.id}
                   deleteColumn={deleteColumn}
+                  updateColumn={updateColumn}
                 />
               ))}
             </SortableContext>
@@ -97,6 +105,7 @@ const KanbanBoard = (props: Props) => {
               <ColumnContainer
                 column={activeColumn}
                 deleteColumn={deleteColumn}
+                updateColumn={updateColumn}
               />
             )}
           </DragOverlay>,
