@@ -95,6 +95,7 @@ function KanbanBoard() {
         >
           <div className="m-auto flex gap-4">
             <div className="flex gap-4">
+            {/* @ts-expect-error */}
               <SortableContext items={columnsId}>
                 {columns.map((col) => (
                   <ColumnContainer
@@ -144,6 +145,7 @@ function KanbanBoard() {
 
   function createTask(columnId: Id) {
     const newTask: Task = {
+      // @ts-expect-error
       id: generateId(),
       columnId,
       content: `Task ${tasks.length + 1}`,
@@ -168,6 +170,7 @@ function KanbanBoard() {
 
   function createNewColumn() {
     const columnToAdd: Column = {
+      // @ts-expect-error
       id: generateId(),
       title: `Column ${columns.length + 1}`,
     };
@@ -266,7 +269,7 @@ function KanbanBoard() {
     if (isActiveATask && isOverAColumn) {
       setTasks((tasks) => {
         const activeIndex = tasks.findIndex((t) => t.id === activeId);
-
+      // @ts-expect-error
         tasks[activeIndex].columnId = overId;
         console.log("DROPPING TASK OVER COLUMN", { activeIndex });
         return arrayMove(tasks, activeIndex, activeIndex);

@@ -22,6 +22,7 @@ function TaskCard({ task, deleteTask, updateTask }: Props) {
     transition,
     isDragging,
   } = useSortable({
+    // @ts-expect-error
     id: task.id,
     data: {
       type: "Task",

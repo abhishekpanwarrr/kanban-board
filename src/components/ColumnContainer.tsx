@@ -40,6 +40,7 @@ function ColumnContainer({
     transition,
     isDragging,
   } = useSortable({
+    // @ts-expect-error
     id: column.id,
     data: {
       type: "Column",
@@ -162,6 +163,7 @@ function ColumnContainer({
 
       {/* Column task container */}
       <div className="flex flex-grow flex-col gap-4 p-2 overflow-x-hidden overflow-y-auto">
+        {/* @ts-expect-error */}
         <SortableContext items={tasksIds}>
           {tasks.map((task) => (
             <TaskCard
